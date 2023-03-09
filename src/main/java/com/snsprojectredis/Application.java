@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-public class SnsProjectRedisApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SnsProjectRedisApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
