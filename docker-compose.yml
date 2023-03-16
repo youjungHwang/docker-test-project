@@ -1,34 +1,34 @@
 version: "3.8"
 services:
-  sns-simple-project-redis:
-    container_name: sns-simple-project-redis
+  docker-test-project-redis:
+    container_name: docker-test-project-redis
     build:
       dockerfile: Dockerfile
       context: ./redis
-    image: kleahwang/sns-simple-project-redis
+    image: kleahwang/docker-test-project-redis
     ports:
       - "6379:6379"
-  sns-simple-project-database:
-    container_name: sns-simple-project-database
+  docker-test-project-database:
+    container_name: docker-test-project-database
     build:
       dockerfile: Dockerfile
       context: ./database
-    image: kleahwang/sns-simple-project-database
+    image: kleahwang/docker-test-project-database
     environment:
-      - MYSQL_DATABASE=sns-simple-project
+      - MYSQL_DATABASE=docker-test-project
       - MYSQL_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
     volumes:
       - ./database/config:/etc/mysql/conf.d
       - ./database/init:/docker-entrypoint-initdb.d
     ports:
       - "3307:3306"
-  sns-simple-project-app:
-    container_name: sns-simple-project-app
+  docker-test-project-app:
+    container_name: docker-test-project-app
     build: .
     depends_on:
-      - sns-simple-project-database
-      - sns-simple-project-redis
-    image: kleahwang/sns-simple-project-app
+      - docker-test-project-database
+      - docker-test-project-redis
+    image: kleahwang/docker-test-project-app
     environment:
       - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
       - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}

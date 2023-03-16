@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.6.7'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'groovy'
 }
 
 group = 'com'
@@ -26,13 +27,34 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
 	// redis
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+	// jwt
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+
 	compileOnly 'org.projectlombok:lombok'
 	implementation 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	// spock
+	testImplementation('org.spockframework:spock-core:2.1-groovy-3.0')
+	testImplementation('org.spockframework:spock-spring:2.1-groovy-3.0')
+
+	// 런타임에 클래스 기반 spock mock을 만들기 위해서 필요
+	testImplementation('net.bytebuddy:byte-buddy:1.12.10')
+
+	// testcontainers (redis의 경우 따로 제공을 안 해주므로, 도커 이미지 받아와서 처리)
+	testImplementation "org.testcontainers:spock:1.17.6"
+	testImplementation "org.testcontainers:mysql:1.17.6"
+
+	// com.google.common 패키지
+	implementation group: 'com.google.guava', name: 'guava', version: '11.0.2'
 }
 
 tasks.named('test') {
