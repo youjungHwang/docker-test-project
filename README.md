@@ -1,1 +1,1 @@
-# Docker + Redis + Jwt 실습 프로젝트
+# Docker + Redis 실습 프로젝트
